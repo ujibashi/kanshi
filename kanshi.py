@@ -7,7 +7,7 @@ jikkan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']
 junishi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
 
 #  与えられた年、月の節入りの日を求める
-def sekki(year, mon):
+def calc_setsuiri(year, mon):
 	# 参考：http://addinbox.sakura.ne.jp/sekki24_topic.htm
 	# 配列A,Dには、上記URLの表のA,Dの値が格納されている。
     # A,Dに格納している節気は順番に、小寒, 立春, 啓蟄, 清明, 立夏, 芒種, 小暑, 立秋, 白露, 寒露, 立冬, 大雪
@@ -23,9 +23,36 @@ def sekki(year, mon):
 	# 月を配列のインデックスにする
 	mon = mon - 1
 	
-	day = int(D[mon] + (A[mon]*(year - 1900))) - int((year - 1900)/4)
+	setsuiri = int(D[mon] + (A[mon]*(year - 1900))) - int((year - 1900)/4)
 
-	return day
+	return setsuiri
+
+# 月を節月に変換
+def calc_setsuduki(year, mon, day):
+
+	setsuduki = 0
+	
+	setsuiri_day = calc_setsuiri(year, mon)
+
+	if day < setsuiri_day:
+		setsuduki_mon = (mon + 11 -2) % 12 + 1
+	else:
+		setsuduki_mon = (mon + 11 -1 ) % 12 + 1
+
+	return setsuduki_mon
+
+# 節月ベースの年月を算出
+def setsuduki_date(year, mon, day):
+
+	setsuduki_mon = calc_setsuduki(year, mon, day)
+
+    # 1月、2月で、節月の新年になっていない日は昨年
+	setsuduki_year = year
+	if mon == 1 or (mon == 2 and setsuduki_mon == 12):
+		setsuduki_year = year -1
+	
+	return (setsuduki_year, setsuduki_mon)
+
 
 # 年の干支を求める
 def year_kanshi(year):
@@ -65,6 +92,18 @@ def g2mjd(year, mon, day):
 
 	return mjd
 
+# 年、月、日の干支を求める
+def calc_kanshi(year, mon, day):
+
+    (y_setsuduki, m_setsuduki) = setsuduki_date(year, mon, day)
+
+    y_kanshi = "%s%s" % year_kanshi(y_setsuduki)
+    m_kanshi = "%s%s" % month_kanshi(y_setsuduki, m_setsuduki)
+    d_kanshi = "%s%s" % day_kanshi(year, mon, day)
+
+    return (y_kanshi, m_kanshi, d_kanshi)
+	
+
 def print_result():
 	# 結果出力
 	for y in range(1900, 2200):
@@ -77,12 +116,13 @@ def print_result():
 					last_day = 28
 			if m == 4 or m == 6 or m == 9 or m == 11:
 				last_day = 30
-	
+
 			print("%-8s %2s %2s %2s" % ("年月日(西暦)", "年干支", "月干支", "日干支"))
 			for d in range(1, last_day + 1):
-				y_kanshi = "%s%s" % year_kanshi(y)
-				m_kanshi = "%s%s" % month_kanshi(y, m)
-				d_kanshi = "%s%s" % day_kanshi(y, m, d)
+
+				(y_setsuduki, m_setsuduki) = setsuduki_date(y, m, d)
+
+				(y_kanshi, m_kanshi, d_kanshi) = calc_kanshi(y, m, d)
 	
 				print("%02d/%02d/%02d    %s   %s   %s" % (y, m, d, y_kanshi, m_kanshi, d_kanshi))
 
@@ -90,6 +130,17 @@ def print_sekki():
 
 	for y in range(1950, 2100):
 		for m in range(1, 13):
-			print("%02d/%02d %02d" % (y, m, sekki(y, m)))
+			last_day = 31
+			if m == 2:
+				if y % 4 == 0:
+					last_day = 29
+				else:
+					last_day = 28
+			if m == 4 or m == 6 or m == 9 or m == 11:
+				last_day = 30
+	
+			for d in range(1, last_day + 1):
+				print("%02d/%02d/%02d %02d %02d" % (y, m, d, calc_setsuiri(y, m), calc_setsuduki(y, m, d)))
 
-print_sekki()
+#print_sekki()
+print_result()
