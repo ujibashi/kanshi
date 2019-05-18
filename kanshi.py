@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 
 import sys
 import math
@@ -6,11 +6,26 @@ import math
 jikkan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']
 junishi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
 
-# get arguments
-#args = sys.argv
-#year = int(args[1])
-#mon  = int(args[2])
-#day  = int(args[3])
+#  与えられた年、月の節入りの日を求める
+def sekki(year, mon):
+	# 参考：http://addinbox.sakura.ne.jp/sekki24_topic.htm
+	# 配列A,Dには、上記URLの表のA,Dの値が格納されている。
+    # A,Dに格納している節気は順番に、小寒, 立春, 啓蟄, 清明, 立夏, 芒種, 小暑, 立秋, 白露, 寒露, 立冬, 大雪
+	
+	D = [6.3811, 4.8693, 6.3968, 5.6280, 6.3771, 6.5733, 8.0091, 8.4102, 8.5186, 9.1414, 8.2396, 7.9152]
+
+	A = [0.242778, 0.242713, 0.242512, 0.242231, 0.241945, 0.241731, 0.241642, 0.241703, 0.241898, 0.242179, 0.242469, 0.242689]
+
+    # １月から２月の節気では、年から1引く
+	if mon == 1 or mon == 2:
+		year = year - 1
+
+	# 月を配列のインデックスにする
+	mon = mon - 1
+	
+	day = int(D[mon] + (A[mon]*(year - 1900))) - int((year - 1900)/4)
+
+	return day
 
 # 年の干支を求める
 def year_kanshi(year):
@@ -50,23 +65,31 @@ def g2mjd(year, mon, day):
 
 	return mjd
 
-# 結果出力
-for y in range(1900, 2200):
-	for m in range(1, 13):
-		last_day = 31
-		if m == 2:
-			if y % 4 == 0:
-				last_day = 29
-			else:
-				last_day = 28
-		if m == 4 or m == 6 or m == 9 or m == 11:
-			last_day = 30
+def print_result():
+	# 結果出力
+	for y in range(1900, 2200):
+		for m in range(1, 13):
+			last_day = 31
+			if m == 2:
+				if y % 4 == 0:
+					last_day = 29
+				else:
+					last_day = 28
+			if m == 4 or m == 6 or m == 9 or m == 11:
+				last_day = 30
+	
+			print("%-8s %2s %2s %2s" % ("年月日(西暦)", "年干支", "月干支", "日干支"))
+			for d in range(1, last_day + 1):
+				y_kanshi = "%s%s" % year_kanshi(y)
+				m_kanshi = "%s%s" % month_kanshi(y, m)
+				d_kanshi = "%s%s" % day_kanshi(y, m, d)
+	
+				print("%02d/%02d/%02d    %s   %s   %s" % (y, m, d, y_kanshi, m_kanshi, d_kanshi))
 
-		print("%-8s %2s %2s %2s" % ("年月日(西暦)", "年干支", "月干支", "日干支"))
-		for d in range(1, last_day + 1):
-			y_kanshi = "%s%s" % year_kanshi(y)
-			m_kanshi = "%s%s" % month_kanshi(y, m)
-			d_kanshi = "%s%s" % day_kanshi(y, m, d)
+def print_sekki():
 
-			print("%02d/%02d/%02d    %s   %s   %s" % (y, m, d, y_kanshi, m_kanshi, d_kanshi))
+	for y in range(1950, 2100):
+		for m in range(1, 13):
+			print("%02d/%02d %02d" % (y, m, sekki(y, m)))
 
+print_sekki()
