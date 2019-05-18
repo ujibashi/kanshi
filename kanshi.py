@@ -50,7 +50,7 @@ def g2mjd(year, mon, day):
 
 	return mjd
 
-
+# 結果出力
 for y in range(1900, 2200):
 	for m in range(1, 13):
 		last_day = 31
