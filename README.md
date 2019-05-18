@@ -8,14 +8,12 @@
 
 説入りの日の求めかたを書いているURLをみつけたので、それを参考に実装。
 
+- [pythonプログラム](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
+
+- [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
+
 参考にしたURLは以下
 
 https://keisan.casio.jp/exec/system/1189949688
 https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%AA%E3%82%A6%E3%82%B9%E9%80%9A%E6%97%A5
 http://addinbox.sakura.ne.jp/sekki24_topic.htm
-
-
-- [pythonプログラム](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
-
-- [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.csv)
-
