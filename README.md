@@ -11,17 +11,22 @@
 
 [プログラム(kanshi.py)](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
 
-#### プログラム実行方法
+
+### プログラム実行
+
+#### 実行方法
 
 ```
 $ python3 kanshi.py
 ```
 
-#### プログラム実行結果
+#### 実行結果
 
 [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
 
-#### ライブラリとして利用する場合
+### ライブラリとして実行
+
+#### 実行方法
 
 ```
 import kanshi
@@ -29,7 +34,7 @@ import kanshi
 print(kanshi.calc_kanshi(2000, 1, 1))
 ```
 
-#### 上記の結果
+#### 実行結果
 
 ('己卯', '丙子', '戊午')
 
