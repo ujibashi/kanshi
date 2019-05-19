@@ -22,17 +22,18 @@ def calc_setsuiri(year, mon):
 	# 月を配列のインデックスにする
 	mon = mon - 1
 	
+    # 節入の日を求める
 	setsuiri = int(D[mon] + (A[mon]*(year - 1900))) - int((year - 1900)/4)
 
 	return setsuiri
 
-# 月を節月に変換
+# グレゴリオ暦の年月日から節月を求める
 def calc_setsuduki(year, mon, day):
 
-	setsuduki = 0
-	
+    # 年と月から節入の日を求める
 	setsuiri_day = calc_setsuiri(year, mon)
 
+    # 節入日より前の日は、前月になる。例えば、立春の前は12月、後は1月になる
 	if day < setsuiri_day:
 		setsuduki_mon = (mon + 11 -2) % 12 + 1
 	else:
@@ -40,9 +41,10 @@ def calc_setsuduki(year, mon, day):
 
 	return setsuduki_mon
 
-# 節月ベースの年月を算出
+# グレゴリオ暦の年月日から節月ベースの年月を取得
 def setsuduki_date(year, mon, day):
 
+    # グレゴリオ暦の年月日から、節月を求める
 	setsuduki_mon = calc_setsuduki(year, mon, day)
 
     # 1月、2月で、節月の新年になっていない日は昨年
@@ -51,7 +53,6 @@ def setsuduki_date(year, mon, day):
 		setsuduki_year = year -1
 	
 	return (setsuduki_year, setsuduki_mon)
-
 
 # 年の干支を求める
 def year_kanshi(year):
@@ -94,10 +95,18 @@ def g2mjd(year, mon, day):
 # 年、月、日の干支を求める
 def calc_kanshi(year, mon, day):
 
+    # 節月ベースの年、月を求める
     (y_setsuduki, m_setsuduki) = setsuduki_date(year, mon, day)
 
+    # 節月ベースの年から年干支を求める
     y_kanshi = "%s%s" % year_kanshi(y_setsuduki)
+    
+    # 節月ベースの年と月から月干支を求める
     m_kanshi = "%s%s" % month_kanshi(y_setsuduki, m_setsuduki)
+
+    # 日干支を求める。
+    # 日干支は、グレゴリオ歴を修正ユリウス日に変換して求めるので、
+    # グレゴリオ歴の年月日を使って求める。
     d_kanshi = "%s%s" % day_kanshi(year, mon, day)
 
     return (y_kanshi, m_kanshi, d_kanshi)
@@ -119,8 +128,7 @@ def print_result():
 			print("%-8s %2s %2s %2s" % ("年月日(西暦)", "年干支", "月干支", "日干支"))
 			for d in range(1, last_day + 1):
 
-				(y_setsuduki, m_setsuduki) = setsuduki_date(y, m, d)
-
+                # 年干支、月干支、日干支を求める
 				(y_kanshi, m_kanshi, d_kanshi) = calc_kanshi(y, m, d)
 	
 				print("%02d/%02d/%02d    %s   %s   %s" % (y, m, d, y_kanshi, m_kanshi, d_kanshi))
