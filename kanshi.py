@@ -149,5 +149,8 @@ def print_sekki():
 			for d in range(1, last_day + 1):
 				print("%02d/%02d/%02d %02d %02d" % (y, m, d, calc_setsuiri(y, m), calc_setsuduki(y, m, d)))
 
-#print_sekki()
-print_result()
+
+if __name__ == "__main__":
+
+    #print_sekki()
+    print_result()
