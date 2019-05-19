@@ -9,7 +9,7 @@
 
 節入の日の求めかたを書いているURLをみつけたので、それを参考に実装。
 
-- [pythonプログラム](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
+- [プログラム(kakashi.py)](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
 
 #### プログラム実行方法
 
