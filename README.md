@@ -14,7 +14,7 @@
 #### プログラム実行方法
 
 ```
-$ python3 kakashi.py
+$ python3 kanshi.py
 ```
 
 #### プログラム実行結果
