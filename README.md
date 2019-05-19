@@ -21,6 +21,15 @@ $ python3 kanshi.py
 
 [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
 
+#### ライブラリとして利用するする場合
+
+```
+import kanshi
+
+print(kanshi.calc_kanshi(2000, 1, 1))
+
+```
+
 ### 参考にしたURL
 
 - 干支計算サイト: https://keisan.casio.jp/exec/system/1189949688
