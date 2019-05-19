@@ -10,6 +10,12 @@
 
 - [pythonプログラム](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
 
+プログラム実行方法
+
+```
+$ python3 kakashi.py
+```
+
 - [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
 
 参考にしたURLは以下
