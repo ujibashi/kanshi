@@ -9,7 +9,7 @@
 
 節入の日の求めかたを書いているURLをみつけたので、それを参考に実装。
 
-- [プログラム(kanshi.py)](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
+[プログラム(kanshi.py)](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
 
 #### プログラム実行方法
 
@@ -19,7 +19,7 @@ $ python3 kakashi.py
 
 #### プログラム実行結果
 
-- [1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
+[1900年 - 2199年 の干支を節月ベースで計算した結果](https://github.com/ujibashi/kanshi/blob/master/1900-2199.setsuduki.csv)
 
 ### 参考にしたURL
 
