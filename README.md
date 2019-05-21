@@ -9,8 +9,8 @@
 
 節入の日の求めかたを書いているURLをみつけたので、それを参考に実装。
 
-注意：参考にしたURL(http://addinbox.sakura.ne.jp/sekki24_topic.htm)によると、
-24節気の計算式が2099年までしか対応していないとのこと。
+注意： 節入り日の計算の参考にしたURL(http://addinbox.sakura.ne.jp/sekki24_topic.htm)
+によると、24節気の計算式が2099年までしか対応していないとのこと。
 よって、それ以降の節入り日ずれている可能性ありです。
 
 [プログラム(kanshi.py)](https://github.com/ujibashi/kanshi/blob/master/kanshi.py)
